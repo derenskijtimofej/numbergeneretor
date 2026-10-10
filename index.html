@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HackerX × Tide Games — Номерной сейф</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+<header class="top"><div class="brand">HACKER<span>X</span> <i>×</i> TIDE GAMES</div><div class="tag">NUMBER LAB / GAME</div></header>
+<h1>Номерной <em>сейф</em></h1>
+<p class="sub">Собирай российские номерные комбинации, покупай их за игровые рубли и пополняй свою коллекцию.</p>
+<section class="panel">
+ <div class="update"><span class="pulse"></span><div><strong>Скоро обновления!</strong><p>Новые игровые режимы, дополнительные регионы и возможности коллекции появятся в будущих версиях.</p></div></div>
+ <div class="balance-row"><div><span class="label">ТВОЙ БАЛАНС</span><div class="balance" id="balance">50 000 ₽</div></div><button class="btn secondary smallbtn" id="daily">🎁 Бонус +2 000 ₽</button></div>
+ <div class="row">
+  <div class="field"><label for="region">Регион РФ</label><select id="region">
+   <option value="23">23 — Краснодарский край</option><option value="93">93 — Краснодарский край</option><option value="123">123 — Краснодарский край</option><option value="77">77 — Москва</option><option value="97">97 — Москва</option><option value="99">99 — Москва</option><option value="50">50 — Московская область</option><option value="90">90 — Московская область</option><option value="150">150 — Московская область</option><option value="116">116 — Татарстан</option><option value="716">716 — Татарстан</option><option value="178">178 — Санкт-Петербург</option><option value="198">198 — Санкт-Петербург</option><option value="66">66 — Свердловская область</option><option value="196">196 — Свердловская область</option><option value="random">Случайный регион</option>
+  </select></div>
+  <div class="field"><label for="mode">Режим</label><select id="mode"><option value="any">Любые номера</option><option value="plain">Обычные номера</option><option value="special">Особые комбинации</option></select></div>
+ </div>
+ <div class="btns"><button class="btn primary" id="generate">⚡ Сгенерировать номер</button></div>
+ <div class="result" id="result" aria-live="polite">
+  <div class="small">ТВОЯ КОМБИНАЦИЯ</div><div class="plate" id="number">У444УУ 123</div>
+  <div class="rarity" id="rarity">ОБЫЧНЫЙ</div><div class="small">СТОИМОСТЬ НОМЕРА</div><div class="price" id="price">1 000 ₽</div>
+  <div class="btns result-actions"><button class="btn primary" id="buy">Купить номер</button><button class="btn secondary" id="reroll">Другой номер</button></div>
+  <p class="feedback" id="feedback"></p>
+ </div>
+ <section class="collection">
+  <div class="section-head"><div><h2>Коллекция номеров</h2><p>Все номера, которые ты купил</p></div><span class="counter" id="count">0 номеров</span></div>
+  <div class="collection-list" id="collection"><div class="empty">Коллекция пока пуста. Сгенерируй и купи первый номер!</div></div>
+ </section>
+ <section class="vault">
+  <div class="section-head"><div><h2>Сейф</h2><p>Сохраняй сюда любимые номера из коллекции</p></div><span class="counter" id="vaultCount">0 в сейфе</span></div>
+  <div class="collection-list" id="vault"><div class="empty">В сейфе пока ничего нет.</div></div>
+ </section>
+ <p class="note">Это развлекательная игра. Номера и цены вымышлены; они не проверяются на доступность и не являются официальными регистрационными данными.</p>
+</section>
+<footer>DEVELOPED BY HACKERX × TIDE GAMES · HTML + CSS + JS</footer>
+</main><script src="script.js"></script></body></html>
