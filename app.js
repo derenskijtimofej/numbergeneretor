@@ -136,3 +136,22 @@ function render() {
   drawList("collectionList", state.collection, false);
   drawList("safeList", state.safe, true);
 }
+$("openBtn").addEventListener("click", () => {
+  const item = makeNumber($("region").value);
+
+  state.opens++;
+  state.balance += 100;
+  state.collection.unshift(item);
+
+  $("number").textContent = item.number;
+  $("regionText").textContent = item.region;
+  $("rarity").textContent = item.rarity;
+  $("rarity").style.color = item.color;
+  $("result").textContent =
+    `В коллекции! Цена: ${money(item.price)} · +100 ₽ за открытие`;
+
+  save();
+  render();
+});
+
+render();
