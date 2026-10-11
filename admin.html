@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Админ-панель | HackerX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html">HX <span>HackerX × Tide Games</span></a>
+  <a href="index.html">← Назад в игру</a>
+</header>
+
+<main>
+  <section class="panel" id="loginPanel">
+    <p class="tag">ADMIN ACCESS</p>
+    <h2>Вход в админ-панель</h2>
+    <form id="loginForm">
+      <label>Логин<input id="login" required></label>
+      <label>Пароль<input id="password" type="password" required></label>
+      <button class="primary">Войти</button>
+      <p id="error"></p>
+    </form>
+  </section>
+
+  <section class="panel" id="dashboard" hidden>
+    <p class="tag">CONTROL CENTER</p>
+    <h2>Управление пользователями</h2>
+    <p class="muted">Демонстрационный список игроков этого браузера.</p>
+    <form id="addForm">
+      <label>Имя нового игрока<input id="newUser" required></label>
+      <button class="primary">Добавить пользователя</button>
+    </form>
+    <div id="users"></div>
+    <button id="logout">Выйти</button>
+  </section>
+</main>
+
+<script>
+const USER_KEY = "hackerxDemoUsers";
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem(USER_KEY)) || []; }
+  catch { return []; }
+}
+function setUsers(users) {
+  localStorage.setItem(USER_KEY, JSON.stringify(users));
+}
+const $ = id => document.getElementById(id);
+
+$("loginForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if ($("login").value === "admin" &&
+      $("password").value === "3337333") {
+    $("loginPanel").hidden = true;
+    $("dashboard").hidden = false;
+    $("error").textContent = "";
+    renderUsers();
+  } else {
+    $("error").textContent = "Неверный логин или пароль.";
+  }
+});
+
+function renderUsers() {
+  const root = $("users");
+  root.replaceChildren();
+
+  getUsers().forEach((user, index) => {
+    const card = document.createElement("article");
+    card.className = "item";
+
+    const name = document.createElement("strong");
+    name.textContent = user.name;
+
+    const status = document.createElement("p");
+    status.textContent = user.banned ? "Заблокирован" : "Активен";
+
+    const button = document.createElement("button");
+    button.textContent = user.banned ? "Разбанить" : "Забанить";
+    button.onclick = () => {
+      const users = getUsers();
+      users[index].banned = !users[index].banned;
+      setUsers(users);
+      renderUsers();
+    };
+
+    card.append(name, status, button);
+    root.append(card);
+  });
+
+  if (!root.children.length) {
+    root.textContent = "Пользователей пока нет.";
+  }
+}
+
+$("addForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const name = $("newUser").value.trim();
+  if (!name) return;
+
+  const users = getUsers();
+  users.push({ name, banned: false });
+  setUsers(users);
+  $("newUser").value = "";
+  renderUsers();
+});
+
+$("logout").addEventListener("click", () => {
+  $("dashboard").hidden = true;
+  $("loginPanel").hidden = false;
+  $("password").value = "";
+});
+</script>
+</body>
+</html>
