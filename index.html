@@ -1,39 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HackerX × Tide Games — Номерной сейф</title><link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HackerX × Tide Games</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="wrap">
-<header class="top"><div class="brand">HACKER<span>X</span> <i>×</i> TIDE GAMES</div><div class="tag">NUMBER LAB / GAME</div></header>
-<h1>Номерной <em>сейф</em></h1>
-<p class="sub">Собирай российские номерные комбинации, покупай их за игровые рубли и пополняй свою коллекцию.</p>
-<section class="panel">
- <div class="update"><span class="pulse"></span><div><strong>Скоро обновления!</strong><p>Новые игровые режимы, дополнительные регионы и возможности коллекции появятся в будущих версиях.</p></div></div>
- <div class="balance-row"><div><span class="label">ТВОЙ БАЛАНС</span><div class="balance" id="balance">50 000 ₽</div></div><button class="btn secondary smallbtn" id="daily">🎁 Бонус +2 000 ₽</button></div>
- <div class="row">
-  <div class="field"><label for="region">Регион РФ</label><select id="region">
-   <option value="23">23 — Краснодарский край</option><option value="93">93 — Краснодарский край</option><option value="123">123 — Краснодарский край</option><option value="77">77 — Москва</option><option value="97">97 — Москва</option><option value="99">99 — Москва</option><option value="50">50 — Московская область</option><option value="90">90 — Московская область</option><option value="150">150 — Московская область</option><option value="116">116 — Татарстан</option><option value="716">716 — Татарстан</option><option value="178">178 — Санкт-Петербург</option><option value="198">198 — Санкт-Петербург</option><option value="66">66 — Свердловская область</option><option value="196">196 — Свердловская область</option><option value="random">Случайный регион</option>
-  </select></div>
-  <div class="field"><label for="mode">Режим</label><select id="mode"><option value="any">Любые номера</option><option value="plain">Обычные номера</option><option value="special">Особые комбинации</option></select></div>
- </div>
- <div class="btns"><button class="btn primary" id="generate">⚡ Сгенерировать номер</button></div>
- <div class="result" id="result" aria-live="polite">
-  <div class="small">ТВОЯ КОМБИНАЦИЯ</div><div class="plate" id="number">У444УУ 123</div>
-  <div class="rarity" id="rarity">ОБЫЧНЫЙ</div><div class="small">СТОИМОСТЬ НОМЕРА</div><div class="price" id="price">1 000 ₽</div>
-  <div class="btns result-actions"><button class="btn primary" id="buy">Купить номер</button><button class="btn secondary" id="reroll">Другой номер</button></div>
-  <p class="feedback" id="feedback"></p>
- </div>
- <section class="collection">
-  <div class="section-head"><div><h2>Коллекция номеров</h2><p>Все номера, которые ты купил</p></div><span class="counter" id="count">0 номеров</span></div>
-  <div class="collection-list" id="collection"><div class="empty">Коллекция пока пуста. Сгенерируй и купи первый номер!</div></div>
- </section>
- <section class="vault">
-  <div class="section-head"><div><h2>Сейф</h2><p>Сохраняй сюда любимые номера из коллекции</p></div><span class="counter" id="vaultCount">0 в сейфе</span></div>
-  <div class="collection-list" id="vault"><div class="empty">В сейфе пока ничего нет.</div></div>
- </section>
- <p class="note">Это развлекательная игра. Номера и цены вымышлены; они не проверяются на доступность и не являются официальными регистрационными данными.</p>
-</section>
-<footer>DEVELOPED BY HACKERX × TIDE GAMES · HTML + CSS + JS</footer>
-</main><script src="script.js"></script></body></html>
+<header>
+  <a class="logo" href="index.html">HX <span>HackerX × Tide Games</span></a>
+  <nav>
+    <a href="#game">Генератор</a>
+    <a href="#collection">Коллекция</a>
+    <a href="#safe">Сейф</a>
+    <a href="admin.html">Админка</a>
+    <a href="https://ru.timofeyder.linkpc.net" target="_blank">Программист ↗</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="tag">NUMBER SIMULATOR · RUS</p>
+    <h1>Собери свою <span>коллекцию</span></h1>
+    <p>Открывай номера, находи редкости и пополняй игровой баланс.</p>
+    <div class="stats">
+      <div><small>БАЛАНС</small><strong id="balance">50 000 ₽</strong></div>
+      <div><small>ОТКРЫТИЙ</small><strong id="opens">0</strong></div>
+      <div><small>НОМЕРОВ</small><strong id="count">0</strong></div>
+    </div>
+  </section>
+
+  <section class="panel" id="game">
+    <p class="tag">ГЕНЕРАТОР</p>
+    <h2>Открытие номера</h2>
+
+    <div class="rarity" id="rarity">Обычный</div>
+    <div class="plate">
+      <div class="plate-number" id="number">А 001 АА</div>
+      <div class="region">
+        <b id="regionText">23</b>
+        <small>RUS 🇷🇺</small>
+      </div>
+    </div>
+    <p id="result">Твой следующий номер ждёт тебя!</p>
+
+    <label for="region">Регион:</label>
+    <select id="region">
+      <option value="23">23 — Краснодарский край</option>
+      <option value="77">77 — Москва</option>
+      <option value="78">78 — Санкт-Петербург</option>
+      <option value="16">16 — Татарстан</option>
+      <option value="66">66 — Свердловская область</option>
+      <option value="54">54 — Новосибирская область</option>
+      <option value="01">01 — Адыгея</option>
+    </select>
+    <button class="primary" id="openBtn">⚡ Открыть номер</button>
+    <p class="muted">За каждое открытие начисляется +100 ₽. Номер автоматически попадёт в коллекцию.</p>
+  </section>
+
+  <section class="panel">
+    <p class="tag">РЕДКОСТИ</p>
+    <h2>Шансы выпадения</h2>
+    <div class="rarities">
+      <div>⚪ Обычный <b>53,81%</b><small>1 000–1 500 ₽</small></div>
+      <div>🟢 Необычный <b>37,96%</b><small>1 500–2 500 ₽</small></div>
+      <div>🔵 Редкий <b>7,98%</b><small>2 500–5 000 ₽</small></div>
+      <div>🟣 Эпический <b>0,24%</b><small>5 000–8 000 ₽</small></div>
+      <div>🟡 Легендарный <b>0,01%</b><small>8 000–10 000 ₽</small></div>
+    </div>
+  </section>
+
+  <section class="panel" id="collection">
+    <p class="tag">ТВОИ НАХОДКИ</p>
+    <h2>Коллекция</h2>
+    <div id="collectionList" class="items">Пока пусто. Открой первый номер!</div>
+  </section>
+
+  <section class="panel" id="safe">
+    <p class="tag">ХРАНИЛИЩЕ</p>
+    <h2>Сейф</h2>
+    <div id="safeList" class="items">В сейфе пока пусто.</div>
+  </section>
+</main>
+
+<footer>HackerX × Tide Games · Скоро обновления!</footer>
+<script src="app.js"></script>
+</body>
+</html>
